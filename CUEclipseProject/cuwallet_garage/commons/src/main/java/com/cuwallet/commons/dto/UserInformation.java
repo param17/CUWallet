@@ -7,39 +7,28 @@ import com.wordnik.swagger.annotations.ApiModelProperty;
 public class UserInformation{
 	
 	@ApiModelProperty
-	private String name;
+	private String emailId;
 	
 	@ApiModelProperty(value = "current age", required = true)
-	private int age;
+	private String phoneNo;
 	
 	@ApiModelProperty
-	private int weight;
-	
-	@ApiModelProperty
-	private int height;
+	private String name;
 
-	public int getAge() {
-		return age;
+	public String getEmailId() {
+		return emailId;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
 	}
 
-	public int getWeight() {
-		return weight;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
 	public String getName() {
@@ -49,7 +38,4 @@ public class UserInformation{
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	
-	
 }

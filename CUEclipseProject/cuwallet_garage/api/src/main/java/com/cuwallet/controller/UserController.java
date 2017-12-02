@@ -36,7 +36,7 @@ public class UserController extends BaseController{
 	@RequestMapping(value = User.NEW_USER, method = RequestMethod.POST)
 	public ResponseEntity<ServiceResponse> setNewUser(@Valid @RequestBody NewUserCreationRequest user){
 		ServiceResponse response = new ServiceResponse();
-		if (!userServices.hasUser(user.getNewUser().getUserId())) {
+		if (!userServices.hasUser(user.getNewUser().getEmaiId())) {
 			userServices.setNewUser(user.getNewUser());
 			response.setMessage("Successful");
 		} else {
@@ -71,7 +71,7 @@ public class UserController extends BaseController{
 	@RequestMapping(value = User.UPDATE_USER_INFO, method = RequestMethod.POST)
 	private ResponseEntity<ServiceResponse> updateExistingUser(@Valid @RequestBody NewUserCreationRequest user) {
 		ServiceResponse response = new ServiceResponse();
-		if (userServices.validUser(user.getNewUser().getUserId())) {
+		if (userServices.validUser(user.getNewUser().getEmaiId())) {
 			userServices.setNewUser(user.getNewUser());
 			response.setMessage("Successful");
 		} else {

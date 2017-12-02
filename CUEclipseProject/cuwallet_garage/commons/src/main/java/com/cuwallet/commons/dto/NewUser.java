@@ -14,12 +14,7 @@ public class NewUser{
 	@ApiModelProperty(required = true)
 	@NotNull
 	@NotEmpty
-	private String userId;
-	
-	@ApiModelProperty(required = true)
-	@NotNull
-	@NotEmpty
-	private String password;
+	private String emaiId;
 	
 	@ApiModelProperty(required = true)
 	@NotNull
@@ -29,29 +24,17 @@ public class NewUser{
 	@ApiModelProperty
 	private String lastName;
 	
-	@ApiModelProperty(value = "current age",required = true)
-	private int age;
-	
-	@ApiModelProperty(required = true)
-	private int weight;
-	
-	@ApiModelProperty(required = true, value = "Height is in CM")
-	private int height;
+	@ApiModelProperty(value = "Phone no",required = true)
+	@NotNull
+	@NotEmpty
+	private String phoneNo;
 
-	public String getUserId() {
-		return userId;
+	public String getEmaiId() {
+		return emaiId;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setEmaiId(String emaiId) {
+		this.emaiId = emaiId;
 	}
 
 	public String getFirstName() {
@@ -70,29 +53,12 @@ public class NewUser{
 		this.lastName = lastName;
 	}
 
-	public int getAge() {
-		return age;
+	public String getPhoneNo() {
+		return phoneNo;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
-
-	public int getWeight() {
-		return weight;
-	}
-
-	public void setWeight(int weight) {
-		this.weight = weight;
-	}
-
-	public int getHeight() {
-		return height;
-	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
 	
 }

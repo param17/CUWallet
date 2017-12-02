@@ -21,13 +21,13 @@ import com.datastax.driver.core.querybuilder.Update.Assignments;
 public class ConfigurationCasssandraDao implements IConfigurationDao {
 
 	private static final String CONFIGURATION_COLUMNFAMILY = "configurations";
-	private static final String REVIEW_KEYSPACE = "review_platform";
+	private static final String CUWALLET_KEYSPACE = "cuwallet_platform";
 	@Autowired
 	private CassandraClient cassandraClient;
 
 	@Override
 	public void updateConfigurationSettings(ConfigurationType configurationType, IConfiguration configuration) {
-		Update update = QueryBuilder.update(REVIEW_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
+		Update update = QueryBuilder.update(CUWALLET_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
 		update.where().and(QueryBuilder.eq("configuration_type", configurationType.getConfigType()));
 		Assignments assignments = update.with();
 		assignments.and(QueryBuilder.set("configuration", JsonCodec.getInstance().toJson(configuration)));
@@ -37,7 +37,7 @@ public class ConfigurationCasssandraDao implements IConfigurationDao {
 
 	@Override
 	public <T extends IConfiguration> T getConfigurationSettings(ConfigurationType configurationType) {
-		Select select = QueryBuilder.select().all().from(REVIEW_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
+		Select select = QueryBuilder.select().all().from(CUWALLET_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
 		select.where().and(QueryBuilder.eq("configuration_type", configurationType.getConfigType()));
 
 		ResultSet result = cassandraClient.getSession().execute(select);
@@ -56,7 +56,7 @@ public class ConfigurationCasssandraDao implements IConfigurationDao {
 
 	@Override
 	public <T extends IConfiguration> T getDefaultConfigurations(ConfigurationType configurationType) {
-		Select select = QueryBuilder.select().all().from(REVIEW_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
+		Select select = QueryBuilder.select().all().from(CUWALLET_KEYSPACE, CONFIGURATION_COLUMNFAMILY);
 		select.where().and(QueryBuilder.eq("configuration_type", configurationType.getConfigType()));
 
 		ResultSet result = cassandraClient.getSession().execute(select);
