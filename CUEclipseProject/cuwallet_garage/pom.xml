@@ -6,13 +6,21 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>CU Wallet payment gateway</name>
 
+	<packaging>pom</packaging>
+	<modules>
+		<module>api</module>
+		<module>commons</module>
+		<module>repository</module>
+		<module>service</module>
+	</modules>
+
 	<properties>
 		<spring.version>4.1.4.RELEASE</spring.version>
 		<com.google.gson.version>2.3.1</com.google.gson.version>
 		<base.version>4.7.1</base.version>
 		<project.version>0.0.1-SNAPSHOT</project.version>
 	</properties>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -56,16 +64,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.2</version>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			<version>1.6.2</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+			<artifactId>slf4j-log4j12</artifactId> <version>1.6.2</version> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -82,6 +83,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-
 </project>
