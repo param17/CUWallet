@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cuwallet.commons.constant.UriConstants.User;
+import com.cuwallet.commons.dto.NewUser;
 import com.cuwallet.commons.dto.NewUserCreationRequest;
 import com.cuwallet.commons.dto.UserInfoResponse;
 import com.cuwallet.commons.dto.UserInformation;
 import com.cuwallet.commons.service.ServiceResponse;
 import com.cuwallet.commons.util.Protocol;
+import com.cuwallet.service.util.IMoneyService;
 import com.cuwallet.service.util.IUserService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
@@ -31,6 +33,9 @@ public class UserController extends BaseController{
 	@Autowired
 	private IUserService userServices;
 	
+	@Autowired
+	private IMoneyService moneyService;
+	
 	@ApiOperation(value = "create new user")
 	@ApiResponse(code = 200, message = "Successfully new user has been created", response = ServiceResponse.class)
 	@RequestMapping(value = User.NEW_USER, method = RequestMethod.POST)
@@ -38,6 +43,7 @@ public class UserController extends BaseController{
 		ServiceResponse response = new ServiceResponse();
 		if (!userServices.hasUser(user.getNewUser().getEmaiId())) {
 			userServices.setNewUser(user.getNewUser());
+			moneyService.addMoney(user.getNewUser().getEmaiId(), user.getNewUser().getPhoneNo(), 0.0);
 			response.setMessage("Successful");
 		} else {
 			response.setMessage("user is already exist");

@@ -1,7 +1,5 @@
 package com.cuwallet.repository.dao.impl;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
 import java.util.UUID;
 
