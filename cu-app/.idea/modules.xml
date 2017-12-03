@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CUWallet.iml" filepath="$PROJECT_DIR$/CUWallet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cu-app.iml" filepath="$PROJECT_DIR$/cu-app.iml" />
     </modules>
   </component>
 </project>
