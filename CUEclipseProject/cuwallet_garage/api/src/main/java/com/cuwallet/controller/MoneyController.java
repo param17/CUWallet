@@ -34,7 +34,13 @@ public class MoneyController extends BaseController {
 	@RequestMapping(value = Money.SEND_MONEY, method = RequestMethod.POST)
 	public ResponseEntity<ServiceResponse> sendMoney(@Valid @RequestBody MoneyInformationRequest request) {
 		ServiceResponse response = new ServiceResponse();
-		boolean status = moneyService.sendMoney(request.getMoneyInformation());
+		boolean status = false;
+		try {
+			status = moneyService.sendMoney(request.getMoneyInformation());
+		} catch (Exception ex) {
+			response.setMessage("user is not registered for wallet");
+			response.setCode(HttpStatus.EXPECTATION_FAILED.toString());
+		}
 		if (status) {
 			response.setMessage("money has been transferred");
 			response.setCode(HttpStatus.OK.toString());
@@ -53,7 +59,13 @@ public class MoneyController extends BaseController {
 			@RequestParam(value = "phone_no", required = true) String phoneNo,
 			@RequestParam(value = "transaction_amount", required = true) double amount) {
 		ServiceResponse response = new ServiceResponse();
-		boolean status = moneyService.addMoney(emailId, phoneNo, amount);
+		boolean status = false;
+		try {
+			status = moneyService.addMoney(emailId, phoneNo, amount);
+		} catch (Exception ex) {
+			response.setMessage("user is not registered for wallet");
+			response.setCode(HttpStatus.EXPECTATION_FAILED.toString());
+		}
 		if (status) {
 			response.setMessage("money has been transferred");
 			response.setCode(HttpStatus.OK.toString());
@@ -72,7 +84,13 @@ public class MoneyController extends BaseController {
 			@RequestParam(value = "email_id", required = true) String emailId,
 			@RequestParam(value = "phone_no", required = true) String phoneNo) {
 		WalletMoneyResponse response = new WalletMoneyResponse();
-		MoneyWallet wallet = moneyService.getWalletMoney(emailId, phoneNo);
+		MoneyWallet wallet = null;
+		try {
+			wallet = moneyService.getWalletMoney(emailId, phoneNo);
+		} catch (Exception ex) {
+			response.setMessage("user is not registered for wallet");
+			response.setCode(HttpStatus.EXPECTATION_FAILED.toString());
+		}
 		response.setMoneyWallet(wallet);
 		response.setMessage("money has been fetched");
 		response.setCode(HttpStatus.OK.toString());

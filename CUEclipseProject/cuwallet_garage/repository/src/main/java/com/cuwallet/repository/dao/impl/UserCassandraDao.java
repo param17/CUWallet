@@ -1,6 +1,8 @@
 package com.cuwallet.repository.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +62,6 @@ public class UserCassandraDao implements IUserDao {
 
 		Select select = QueryBuilder.select().all().from(CUWALLET_KEYSPACE, USER_COLUMNFAMILY);
 		select.where().and(QueryBuilder.eq("email_id", userId));
-
 		ResultSet result = cassandraClient.getSession().execute(select);
 		Iterator<Row> iterator = result.iterator();
 		UserInformation user = null;
@@ -93,6 +94,32 @@ public class UserCassandraDao implements IUserDao {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<UserInformation> getAllUserInfo() {
+		Select select = QueryBuilder.select().all().from(CUWALLET_KEYSPACE, USER_COLUMNFAMILY);
+		ResultSet result = cassandraClient.getSession().execute(select);
+		Iterator<Row> iterator = result.iterator();
+		List<UserInformation> userInformation = new ArrayList<UserInformation>();;
+		while (iterator.hasNext()) {
+			Row row = iterator.next();
+			UserInformation user = new UserInformation();
+			String name = "";
+			String firstName = row.getString("first_name");
+			String lastName = row.getString("last_name");
+			if (null != lastName) {
+				name = firstName + " " + lastName;
+			} else {
+				name = firstName;
+			}
+			user.setName(name);
+			user.setEmailId(row.getString("email_id"));
+			user.setPhoneNo(row.getString("phone_no"));
+			userInformation.add(user);
+		}
+
+		return userInformation;
 	}
 
 	

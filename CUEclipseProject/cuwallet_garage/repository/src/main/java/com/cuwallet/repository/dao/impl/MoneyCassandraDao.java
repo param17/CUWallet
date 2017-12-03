@@ -249,6 +249,10 @@ public class MoneyCassandraDao implements IMoneyDao {
 
 	@Override
 	public MoneyWallet getWalletMoney(String emailId, String phoneNo) {
+		boolean userStatus = validateUser(emailId);
+		if(userStatus == false) {
+			throw new ForbiddenException(ErrorCode.AUTHENTICATION_ERROR, "user id is not registered for mobile wallets");
+		}
 		Select select = QueryBuilder.select().all().from(CUWALLET_KEYSPACE, MONEY_WALLET_COLUMNFAMILY);
 		select.where().and(QueryBuilder.eq("email_id", emailId));
 		ResultSet result = cassandraClient.getSession().execute(select);

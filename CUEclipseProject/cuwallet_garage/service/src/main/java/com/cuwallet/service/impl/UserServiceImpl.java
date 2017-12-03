@@ -1,5 +1,7 @@
 package com.cuwallet.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -35,6 +37,11 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public boolean validUser(String userId) {
 		return userDao.validUser(userId);
+	}
+
+	@Override
+	public List<UserInformation> getAllUserInfo() {
+		return userDao.getAllUserInfo();
 	}
 	
     
