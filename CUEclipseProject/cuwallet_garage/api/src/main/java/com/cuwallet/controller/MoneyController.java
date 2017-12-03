@@ -87,13 +87,13 @@ public class MoneyController extends BaseController {
 		MoneyWallet wallet = null;
 		try {
 			wallet = moneyService.getWalletMoney(emailId, phoneNo);
+			response.setMoneyWallet(wallet);
+			response.setMessage("money has been fetched");
+			response.setCode(HttpStatus.OK.toString());
 		} catch (Exception ex) {
 			response.setMessage("user is not registered for wallet");
 			response.setCode(HttpStatus.EXPECTATION_FAILED.toString());
 		}
-		response.setMoneyWallet(wallet);
-		response.setMessage("money has been fetched");
-		response.setCode(HttpStatus.OK.toString());
 		response.setProtocol(Protocol.PROTOCOL_JSON);
 		return new ResponseEntity<WalletMoneyResponse>(response, HttpStatus.OK);
 	}
