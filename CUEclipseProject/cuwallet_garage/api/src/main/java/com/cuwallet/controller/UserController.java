@@ -1,5 +1,7 @@
 	package com.cuwallet.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cuwallet.commons.constant.UriConstants.User;
+import com.cuwallet.commons.dto.AllUserInfoResponse;
 import com.cuwallet.commons.dto.NewUser;
 import com.cuwallet.commons.dto.NewUserCreationRequest;
 import com.cuwallet.commons.dto.UserInfoResponse;
@@ -83,6 +86,38 @@ public class UserController extends BaseController{
 		} else {
 			response.setMessage("incorrect username or password or invalid user");
 		}
+		response.setCode(HttpStatus.OK.toString());
+		response.setProtocol(Protocol.PROTOCOL_JSON);
+		return new ResponseEntity<ServiceResponse>(response, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "get all registered user info")
+	@ApiResponse(code = 200, message = "Successfully list of user info is fetched", response = AllUserInfoResponse.class)
+	@RequestMapping(value = User.GET_ALL_USER_INFO, method = RequestMethod.GET)
+	public ResponseEntity<AllUserInfoResponse> getUserInfo(){
+		List<UserInformation> userInformation = userServices.getAllUserInfo();
+		AllUserInfoResponse response = new AllUserInfoResponse();
+		if (userInformation == null) {
+			response.setMessage("No user in the database");
+		}
+		else{
+			response.setMessage("Successful");
+		}
+		response.setUserInformation(userInformation);
+		response.setCode(HttpStatus.OK.toString());
+		response.setProtocol(Protocol.PROTOCOL_JSON);
+		return new ResponseEntity<AllUserInfoResponse>(response, HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "delete complete user info")
+	@ApiResponse(code = 200, message = "Successfully list of user info is deleted", response = ServiceResponse.class)
+	@RequestMapping(value = User.GET_ALL_USER_INFO, method = RequestMethod.GET)
+	public ResponseEntity<ServiceResponse> deleteUserInfo(@RequestParam(value = "user_id", required = true) String userId,
+			@RequestParam(value = "phone_number", required = true) String phoneNo
+			){
+		ServiceResponse response = new ServiceResponse();
+		userServices.deleteUserInfo(userId, phoneNo);
+		response.setMessage("user info is successfully deleted");
 		response.setCode(HttpStatus.OK.toString());
 		response.setProtocol(Protocol.PROTOCOL_JSON);
 		return new ResponseEntity<ServiceResponse>(response, HttpStatus.OK);

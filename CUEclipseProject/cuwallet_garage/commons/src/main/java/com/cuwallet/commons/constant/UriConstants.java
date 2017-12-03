@@ -7,6 +7,8 @@ public class UriConstants {
 		public static final String NEW_USER = "/api/service/user/create";
 
 		public static final String GET_USER_INFO = "/api/service/user/get";
+		
+		public static final String GET_ALL_USER_INFO = "/api/service/user/get/all";
 
 		public static final String UPDATE_USER_INFO = "/api/service/user/update";
 	}
