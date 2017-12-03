@@ -1,7 +1,9 @@
 package com.tabian.firebasegooglesignin;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 import static com.tabian.firebasegooglesignin.R.id.but_Pay;
+import static com.tabian.firebasegooglesignin.R.id.edit_query;
 
 /**
  * Activity to demonstrate basic retrieval of the Google user's ID, email address, and basic
@@ -42,6 +45,8 @@ public class SignInActivity extends AppCompatActivity implements
 
         // Views
         mStatusTextView = (TextView) findViewById(R.id.status);
+
+
 
         // Button listeners
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -138,6 +143,15 @@ public class SignInActivity extends AppCompatActivity implements
             // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             mStatusTextView.setText(getString(R.string.signed_in_fmt, acct.getDisplayName()));
+
+            // SharedPreference
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            String myEmail = acct.getEmail();
+            editor.putString("myEmail", myEmail);
+            editor.putString("myPhone", "1234567890");
+            editor.commit();
+
             updateUI(true);
         } else {
             // Signed out, show unauthenticated UI.
