@@ -17,4 +17,6 @@ public interface IUserDao {
 
 	List<UserInformation> getAllUserInfo();
 
+	void deleteUserInfo(String userId, String phoneNo);
+
 }

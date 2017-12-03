@@ -15,12 +15,10 @@ public class UserDaoImpl implements IUserDao {
 
 	@Resource(name = "userCassandraDao")
 	private IUserDao userDao;
-	
+
 	@Override
 	public void setNewUser(NewUser newUser) {
-		
 		userDao.setNewUser(newUser);
-		
 	}
 
 	@Override
@@ -41,6 +39,12 @@ public class UserDaoImpl implements IUserDao {
 	@Override
 	public List<UserInformation> getAllUserInfo() {
 		return userDao.getAllUserInfo();
+	}
+
+	@Override
+	public void deleteUserInfo(String userId, String phoneNo) {
+		userDao.deleteUserInfo(userId, phoneNo);
+
 	}
 
 }

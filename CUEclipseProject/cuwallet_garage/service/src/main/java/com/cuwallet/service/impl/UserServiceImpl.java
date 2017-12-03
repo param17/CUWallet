@@ -43,6 +43,12 @@ public class UserServiceImpl implements IUserService {
 	public List<UserInformation> getAllUserInfo() {
 		return userDao.getAllUserInfo();
 	}
+
+	@Override
+	public void deleteUserInfo(String userId, String phoneNo) {
+		userDao.deleteUserInfo(userId, phoneNo);
+		
+	}
 	
     
 

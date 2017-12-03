@@ -122,5 +122,11 @@ public class UserCassandraDao implements IUserDao {
 		return userInformation;
 	}
 
+	@Override
+	public void deleteUserInfo(String userId, String phoneNo) {
+		String query = "delete from " + CUWALLET_KEYSPACE + "." + USER_COLUMNFAMILY + " where email_id = '" + userId + "'";
+		cassandraClient.getSession().execute(query);
+	}
+
 	
 }

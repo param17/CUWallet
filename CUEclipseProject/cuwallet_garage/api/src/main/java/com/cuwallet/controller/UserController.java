@@ -108,4 +108,18 @@ public class UserController extends BaseController{
 		response.setProtocol(Protocol.PROTOCOL_JSON);
 		return new ResponseEntity<AllUserInfoResponse>(response, HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "delete complete user info")
+	@ApiResponse(code = 200, message = "Successfully list of user info is deleted", response = ServiceResponse.class)
+	@RequestMapping(value = User.GET_ALL_USER_INFO, method = RequestMethod.GET)
+	public ResponseEntity<ServiceResponse> deleteUserInfo(@RequestParam(value = "user_id", required = true) String userId,
+			@RequestParam(value = "phone_number", required = true) String phoneNo
+			){
+		ServiceResponse response = new ServiceResponse();
+		userServices.deleteUserInfo(userId, phoneNo);
+		response.setMessage("user info is successfully deleted");
+		response.setCode(HttpStatus.OK.toString());
+		response.setProtocol(Protocol.PROTOCOL_JSON);
+		return new ResponseEntity<ServiceResponse>(response, HttpStatus.OK);
+	}
 }

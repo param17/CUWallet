@@ -16,5 +16,7 @@ public interface IUserService {
 	public boolean validUser(String userId);
 
 	public List<UserInformation> getAllUserInfo();
+
+	public void deleteUserInfo(String userId, String phoneNo);
 	
 }

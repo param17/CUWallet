@@ -146,6 +146,9 @@ public class MoneyCassandraDao implements IMoneyDao {
 				return false;
 			}
 			double balance = getAmountFromBank(userBankInformation);
+			if(balance<amount) {
+				return false;
+			}
 			double remainingBalance = balance - amount;
 			updateUserBankAmount(userBankInformation, remainingBalance);
 			updateUserWallet(emailId, phoneNo, amount);
