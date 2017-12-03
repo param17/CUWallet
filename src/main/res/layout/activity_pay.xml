@@ -24,7 +24,7 @@
             tools:layout_editor_absoluteY="203dp" />
 
         <EditText
-            android:id="@+id/editText22"
+            android:id="@+id/email_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -41,7 +41,7 @@
             tools:layout_editor_absoluteY="101dp" />
 
         <EditText
-            android:id="@+id/editText23"
+            android:id="@+id/phone_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -58,7 +58,7 @@
             tools:layout_editor_absoluteY="305dp" />
 
         <EditText
-            android:id="@+id/editText24"
+            android:id="@+id/amount_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -67,7 +67,7 @@
             tools:layout_editor_absoluteX="134dp" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/transfer_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Transfer"
